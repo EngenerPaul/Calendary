@@ -1,0 +1,12 @@
+body {
+    background: rgb(245, 245, 241); /* Цвет фона */
+}
+/* The heart of the matter */
+.testimonial-group > .row {
+overflow-x: auto;
+white-space: nowrap;
+}
+.testimonial-group > .row > .col-sm-4 {
+display: inline-block;
+float: none;
+}

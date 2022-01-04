@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container testimonial-group">
+    <div class="row text-center flex-nowrap">
+        <div class="row flex-nowrap">
+            {% for day in days %}
+                <div class="col-md-3">
+                    <h5 style="margin-bottom: 0rem">{{day.title|date:"l"}}</h5>
+                    <p>{{day.title|date:"j E"}}</p>
+                    
+                    {% for les in day.lessons.all %}
+                    <div class="card">
+                        {% if les.salary > 700 %}
+                        <div class="card-body-green">
+                        {% else %}
+                        <div class="card-body">
+                        {% endif %}
+                            <div class="card-cross">
+                                <a class="card-cross-label" href="{% url 'delete_lesson' les.pk %}"><img src="{% static 'img/cross.jpg'%}" alt="" height=12></a>
+                            </div>
+                            <h5 class="card-title"><a href="{{ les.get_absolute_url }}">{{les.theme}}</a></h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{les.pupil_name}} {{les.pupils_father}}</h6>
+                            <div class="row justify-content-center">
+                                <div class="col-md-4">{{les.time}}</div>
+                                <div class="col-md-4">{{les.salary}} руб.</div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

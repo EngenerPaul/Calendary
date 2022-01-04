@@ -1,0 +1,46 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="{% static 'style.css' %}" rel="stylesheet">
+
+    <title>Calendary</title>
+</head>
+
+<body>
+
+{% block about_me %}
+{% include 'inc/_about_me.html' %}
+{% endblock about_me %}
+
+<div class="container" style="margin-top: 30px; margin-bottom: 15px;">
+    <div class="row">
+        <div class="col-md-2" width='200'>
+            <img src="{% static 'img/picture.png'%}" alt="" height='160'>
+        </div>
+        <div class="col-md-4">
+            <h3><a href="{% url 'home' %}" style="color: black; text-decoration: none;">Сережа & Компания</a></h3>
+            <p>Директор: Тепляков Сергей<br>Исполнительный директор: Гвидо ван Россум</p>
+            <p><a class="btn btn-primary" style="margin-left: 90px;" href="{%url 'add_lesson'%}" >Запланировать</a></p>
+        </div>
+        <div class="col">
+            <a href="https://www.python.org/"><img src="{% static 'img/python.png'%}" alt="" style="float:right;" height='80'></a>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+{% block content %}{% endblock content %}
+
+<p style="text-align: right; margin: 3px;"><b>Занимайтесь программированием, а не войной</b></p>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+</html>

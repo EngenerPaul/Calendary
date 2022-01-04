@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <form action="{% url 'add_lesson' %}" method="post">
+        {% csrf_token %}
+        
+        
+        <div class="mb-3">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="{{ form.title.id_for_label }}" class="form-label" value="{{ lesson.pupil_name }}">Имя: </label>
+                    <input type="text" name="pupil_name" class="form-control" placeholder="..." maxlength="20" required="" id="id_pupil_name" value="{{lesson.pupil_name}}">
+                    <div class="invalid-feedback">
+                        {{ form.pupil_name.errors }}
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="{{ form.title.id_for_label }}" class="form-label" value="{{ lesson.pupil_surname }}">Фамилия: </label>
+                    <input type="text" name="pupil_surname" class="form-control" placeholder="(необязательно)" maxlength="20" id="id_pupil_surname" value="{{lesson.pupil_surname}}">
+                    <div class="invalid-feedback">
+                        {{ form.pupil_surname.errors }}
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="{{ form.title.id_for_label }}" class="form-label" value="{{ lesson.pupils_father }}">Отчество: </label>
+                    <input type="text" name="pupils_father" class="form-control" placeholder="(необязательно)" maxlength="20" id="id_pupils_father" value="{{lesson.pupils_father}}">
+                    <div class="invalid-feedback">
+                        {{ form.pupils_father.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <label for="{{ form.title.id_for_label }}" class="form-label">Тема: </label>
+            <input type="text" name="theme" class="form-control" placeholder="(необязательно)" maxlength="20" id="id_theme" value="{{lesson.theme}}">
+            <div class="invalid-feedback">
+                {{ form.theme.errors }}
+            </div>
+        </div>
+        <div class="col-md-9 mb-3">
+            <label for="{{ form.title.id_for_label }}" class="form-label">Примечание: </label>
+            <textarea name="note" cols="40" rows="5" class="form-control" placeholder="(необязательно)" id="id_note">{{lesson.note}}</textarea>
+            <div class="invalid-feedback">
+                {{ form.note.errors }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="{{ form.title.id_for_label }}" class="form-label">Зарплата: </label>
+                    <input type="number" name="salary" value="700" class="form-control" placeholder="..." required="" id="id_salary" value="{{lesson.salary}}">
+                    <div class="invalid-feedback">
+                        {{ form.salary.errors }}
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="{{ form.title.id_for_label }}" class="form-label">Время: </label>
+                    <input type="text" name="time" class="form-control" placeholder="00:00:00" required="" id="id_time" value="{{lesson.time}}">
+                    <div class="invalid-feedback">
+                        {{ form.time.errors }}
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="{{ form.title.id_for_label }}" class="form-label">Дата: </label>
+                    <div class="related-widget-wrapper">
+                        <select name="date" required="" id="id_date">
+                            {% for date in dates %}
+                            {% if date.title|date:"Y-m-d" == lesson.date.title|date:"Y-m-d" %}
+                            <option value="{{date.pk}}" selected>{{ lesson.date.title|date:"Y-m-d" }}</option>
+                            {% else %}
+                            <option value="{{date.pk}}">{{date.title|date:"Y-m-d"}}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    <a href="{% url 'add_day_in_lesson' lesson.pk %}"><img src="/static/admin/img/icon-addlink.svg" title="Добавить день" alt="Добавить"></a>
+                    <div class="invalid-feedback">
+                        {{ form.date.errors }}
+                    </div></div>
+                </div>
+            </div>
+        </div>
+        
+
+        <button type='submit' class='btn btn-primary btn-block'>Сохранить</button>
+    </form>
+</div>
+{% endblock content %}
