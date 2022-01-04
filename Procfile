@@ -1,1 +1,1 @@
-web: gunicorn heroku_site.wsgi
+web: gunicorn root.wsgi
