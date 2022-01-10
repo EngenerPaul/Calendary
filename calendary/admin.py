@@ -5,8 +5,8 @@ from datetime import date, timedelta
 
 
 class LessonAdmin(admin.ModelAdmin):
-    list_display = ('id', 'pupil_name', 'pupils_father', 'theme', 'salary', 'time', 'date')
-    list_display_links = ('id', 'pupil_name')
+    list_display = ('id', 'theme', 'salary', 'time', 'date')
+    list_display_links = ('id',)
 
     def get_form(self, request, obj=None, change=False, **kwargs):
         form = super().get_form(request, obj=None, change=False, **kwargs)

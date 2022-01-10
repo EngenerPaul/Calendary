@@ -78,10 +78,23 @@ WSGI_APPLICATION = 'root.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'deb4pbmosd0g4j',
+        'USER': 'ewkkrglibuqzlm', 
+        'PASSWORD': 'c30684789f09c293e52cf618ac05d4e562b7f10791b77ebfc3d1c96ec982254e',
+        'HOST': 'ec2-107-21-146-133.compute-1.amazonaws.com', 
+        'PORT': '5432',
+        # 'URI': 'postgres://ewkkrglibuqzlm:c30684789f09c293e52cf618ac05d4e562b7f10791b77ebfc3d1c96ec982254e@ec2-107-21-146-133.compute-1.amazonaws.com:5432/deb4pbmosd0g4j',
+        # 'Heroku CLI': 'heroku pg:psql postgresql-flexible-74089 --app calendar-kpa',
     }
 }
 

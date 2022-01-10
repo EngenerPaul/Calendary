@@ -15,7 +15,8 @@ class Home(ListView):
     context_object_name = 'days'
 
     def get_queryset(self):
-        return Day.objects.filter(title__gte=date.today()) # прошлые дни не отображаются, но остаются  в БД
+        # return Day.objects.filter(title__gte=date.today()) # прошлые дни не отображаются, но остаются  в БД
+        return Day.objects.filter(title__gte='2022-01-01') # прошлые дни не отображаются, но остаются  в БД
 
 
 class AddLesson(CreateView):
@@ -25,7 +26,8 @@ class AddLesson(CreateView):
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
-        form.fields['date'].queryset = Day.objects.filter(title__gte=date.today()) # прошлые дни не попадут в выборку
+        # form.fields['date'].queryset = Day.objects.filter(title__gte=date.today()) # прошлые дни не попадут в выборку
+        # form.fields['date'].queryset = Day.objects.filter(title__gte='2022-01-01') # в пет-проекте отображаются все дни
         return form
     
 
@@ -42,7 +44,8 @@ class LessonView(DetailView, FormMixin):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['dates'] = Day.objects.filter(title__gte=date.today()) # прошлые дни не попадут в выборку
+        # context['dates'] = Day.objects.filter(title__gte=date.today()) # прошлые дни не попадут в выборку
+        context['dates'] = Day.objects.filter(title__gte='2022-01-01') # в пет-проекте отображаются все дни
         return context
 
 
