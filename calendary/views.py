@@ -40,7 +40,7 @@ class LessonView(DetailView, FormMixin):
 
     # needed for updating page after save form
     def get_success_url(self, **kwargs):
-        return reverse_lazy('post', kwargs={'slug':self.get_object().slug})
+        return reverse_lazy('home')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
