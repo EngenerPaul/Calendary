@@ -1,7 +1,7 @@
 from django.http.response import HttpResponseNotFound
 from django.shortcuts import redirect, render
 from django.urls.base import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.views.generic.edit import FormMixin
 from datetime import date, timedelta
 
@@ -31,14 +31,11 @@ class AddLesson(CreateView):
         return form
     
 
-class LessonView(DetailView, FormMixin):
+class LessonView(UpdateView):    
     model = Lesson
     template_name = 'calendary/lesson.html'
-    context_object_name = 'lesson'
-
     form_class = FormLesson
 
-    # needed for updating page after save form
     def get_success_url(self, **kwargs):
         return reverse_lazy('home')
 
