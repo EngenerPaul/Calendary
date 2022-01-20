@@ -12,13 +12,29 @@
                     
                     {% for les in day.lessons.all %}
                     <div class="card">
-                        {% if les.salary > 700 %}
-                        <div class="card-body-green">
+                        {% if les.pk == request.GET.id|add:'0' %}
+                        <div class="card-body" style="background: rgb(187, 236, 187);">
                         {% else %}
-                        <div class="card-body">
+                        
+                            {% if les.salary > 700 %}
+                            <div class="card-body-green">
+                            {% else %}
+                            <div class="card-body">
+                            {% endif %}
+                        
                         {% endif %}
                             <div class="card-cross">
-                                <a class="card-cross-label" href="{% url 'delete_lesson' les.pk %}"><img src="{% static 'img/cross.jpg'%}" alt="" height=12></a>
+                                <form id="delete_form_{{les.pk}}" action="{% url 'delete_lesson' les.pk %}" method="post">{% csrf_token %}</form>
+                                <a class="card-cross-label" href="javascript:void()" onclick="delete_question_{{les.pk}}()">
+                                    <img src="{% static 'img/cross.jpg'%}" alt="" height=12>
+                                </a>
+                                <script>
+                                    function delete_question_{{les.pk}}() {
+                                        if (confirm("Вы уверены?")) {
+                                            document.getElementById('delete_form_{{les.pk}}').submit()
+                                        }
+                                    }
+                                </script>
                             </div>
                             <h5 class="card-title"><a href="{{ les.get_absolute_url }}">{{les.theme}}</a></h5>
                             <h6 class="card-subtitle mb-2 text-muted">{{les.pupil_name}} {{les.pupils_father}}</h6>
