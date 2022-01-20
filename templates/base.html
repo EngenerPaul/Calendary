@@ -30,8 +30,18 @@
             <p>Директор: Тепляков Сергей<br>Исполнительный директор: Гвидо ван Россум</p>
             <p><a class="btn btn-primary" style="margin-left: 90px;" href="{%url 'add_lesson'%}" >Запланировать</a></p>
         </div>
-        <div class="col">
+        <div class="col" style="min-height: 140;">
             <a href="https://www.python.org/"><img src="{% static 'img/python.png'%}" alt="" style="float:right;" height='80'></a>
+            {% if messages %}
+            <div style="position: relative; top: 80px; left: 100%; width: 250px;">
+                <div class="alert alert-success" style="right: 250px; text-align: center;">
+                    {% for mes in messages %}
+                        {{ mes }}
+                    {% endfor %}
+                </div>
+            </div>
+            
+            {% endif %}
         </div>
     </div>
 </div>

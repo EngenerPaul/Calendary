@@ -1,12 +1,25 @@
+from email import message
 from django.http.response import HttpResponseNotFound
 from django.shortcuts import redirect, render
 from django.urls.base import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.views.generic.edit import FormMixin
 from datetime import date, timedelta
+from django.contrib import messages
 
 from .models import * 
 from .forms import *
+
+
+class CustomMessageMixin:
+    
+    @property
+    def success_msg(self):
+        return False
+    
+    def form_valid(self, form):
+        messages.success(self.request, self.success_msg)
+        return super().form_valid(form)
 
 
 class Home(ListView):
@@ -19,10 +32,11 @@ class Home(ListView):
         return Day.objects.filter(title__gte='2022-01-01') # прошлые дни не отображаются, но остаются  в БД
 
 
-class AddLesson(CreateView):
+class AddLesson(CustomMessageMixin, CreateView):
     form_class = FormLesson
     template_name = 'calendary/add_lesson.html'
     success_url = reverse_lazy('home')
+    success_msg = 'Запись создана'
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
@@ -31,10 +45,11 @@ class AddLesson(CreateView):
         return form
     
 
-class LessonView(UpdateView):    
+class LessonView(CustomMessageMixin, UpdateView):    
     model = Lesson
     template_name = 'calendary/lesson.html'
     form_class = FormLesson
+    success_msg = 'Запись успешно обновлена'
 
     def get_success_url(self, **kwargs):
         return reverse_lazy('home')
