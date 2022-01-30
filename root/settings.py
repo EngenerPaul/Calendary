@@ -14,6 +14,12 @@ import os
 from pathlib import Path
 import django_heroku
 
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-efy1i44cz41nk^(f-@xw2apvx2otli&8hm@gmjkkxeem-58ksr'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -88,10 +94,10 @@ WSGI_APPLICATION = 'root.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'deb4pbmosd0g4j',
-        'USER': 'ewkkrglibuqzlm', 
-        'PASSWORD': 'c30684789f09c293e52cf618ac05d4e562b7f10791b77ebfc3d1c96ec982254e',
-        'HOST': 'ec2-107-21-146-133.compute-1.amazonaws.com', 
+        'NAME': env('DATABASE_NAME'),
+        'USER': env('DATABASE_USER'), 
+        'PASSWORD': env('DATABASE_PASS'),
+        'HOST': env('DATABASE_HOST'), 
         'PORT': '5432',
         # 'URI': 'postgres://ewkkrglibuqzlm:c30684789f09c293e52cf618ac05d4e562b7f10791b77ebfc3d1c96ec982254e@ec2-107-21-146-133.compute-1.amazonaws.com:5432/deb4pbmosd0g4j',
         # 'Heroku CLI': 'heroku pg:psql postgresql-flexible-74089 --app calendar-kpa',
